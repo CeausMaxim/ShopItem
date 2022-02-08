@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80sp"
+            android:layout_marginTop="20sp"
             android:text="@string/user_login"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -75,5 +75,28 @@
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             ></Button>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Or"
+            android:textSize="22sp"
+            android:textAllCaps="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorDarkRed"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"
+            />
+
+        <TextView
+            android:id="@+id/userSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_user_signup"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:textColor="@color/colorDarkRed"
+            />
+
     </LinearLayout>
 </LinearLayout>
