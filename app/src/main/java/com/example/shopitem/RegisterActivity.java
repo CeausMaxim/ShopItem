@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText ufirstname, ulastname, uemail, upassword, uconfpassword, ucontactno;
@@ -14,11 +16,14 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputLayout userFirstNameWrapper, userLastNameWrapper, userEmailWrapper, userPasswordWrapper,
                 userConfPasswordWrapper, userContactNoWrapper;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mAuth = FirebaseAuth.getInstance();
         ufirstname = findViewById(R.id.userFirstName);
         ulastname = findViewById(R.id.userLastName);
         uemail = findViewById(R.id.userEmailAddress);
