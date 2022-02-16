@@ -48,15 +48,16 @@
             android:textColor="@color/colorWhite"
             android:id="@+id/btnUserLogin"
             />
+
         <Button
-            android:id="@+id/btnUserSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btnsignupbg"
             android:layout_marginTop="10sp"
-            android:textSize="20sp"
+            android:background="@drawable/btnsignupbg"
             android:text="@string/btn_user_signup"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:id="@+id/btnUserSignup"/>
 
 
     </LinearLayout>
