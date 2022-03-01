@@ -80,7 +80,7 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.appcompat.widget.AppCompatEditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
@@ -97,7 +97,7 @@
 
     </EditText>
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.appcompat.widget.AppCompatEditText>
 
         <LinearLayout
             android:layout_width="match_parent"
