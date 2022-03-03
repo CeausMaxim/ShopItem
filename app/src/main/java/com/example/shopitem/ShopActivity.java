@@ -59,7 +59,7 @@ public class ShopActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         mPopulars=new ArrayList<>();
-        mDatabaseRef= FirebaseDatabase.getInstance().getReference("popular");
+        mDatabaseRef=FirebaseDatabase.getInstance().getReference("popular");
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

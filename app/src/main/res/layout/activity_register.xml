@@ -73,11 +73,9 @@
                     android:textSize="18sp"
                     android:textColorHint="@color/colorRed"
                     >
-
                 </EditText>
-
-
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatEditText
