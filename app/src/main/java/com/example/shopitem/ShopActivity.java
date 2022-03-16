@@ -7,6 +7,7 @@ import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,11 +23,13 @@ import java.util.List;
 public class ShopActivity extends AppCompatActivity {
     ViewFlipper imgBanner;
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView, cRecyclerView;
     private PopularAdapter mAdapter;
+    private CategoryAdapter cAdapter;
 
     private DatabaseReference mDatabaseRef;
     private List<Popular> mPopulars;
+    private List<Category> cCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class ShopActivity extends AppCompatActivity {
         for (int slide:sliders){
             bannerFliper(slide);
         }
-
+        showCategories();
         showPopularProducts();
     }
     public void bannerFliper(int image){
@@ -69,6 +72,32 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 mAdapter = new PopularAdapter(ShopActivity.this, mPopulars);
                 mRecyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(ShopActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public void showCategories(){
+        cRecyclerView = findViewById(R.id.category_view);
+        cRecyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        cRecyclerView.setLayoutManager(mLayoutManager);
+
+        cCategory = new ArrayList<>();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Category");
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                    Category category = postSnapshot.getValue(Category.class);
+                    cCategory.add(category);
+                }
+                cAdapter = new CategoryAdapter(ShopActivity.this, cCategory);
+                cRecyclerView.setAdapter(cAdapter);
             }
 
             @Override
