@@ -5,8 +5,17 @@ import android.support.v4.app.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.shopitem.listener.ICartLoadListener;
+import com.example.shopitem.listener.IDProductLoadListener;
+import com.nex3z.notificationbadge.NotificationBadge;
+
+import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity {
 

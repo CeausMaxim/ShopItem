@@ -1,7 +1,12 @@
 package com.example.shopitem;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -11,25 +16,34 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shopitem.listener.ICartLoadListener;
+import com.example.shopitem.listener.IDProductLoadListener;
+import com.example.shopitem.model.CartModel;
+import com.example.shopitem.model.ProductModel;
+import com.example.shopitem.utils.SpaceItemDecoration;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ShopActivity extends AppCompatActivity {
+
     ViewFlipper imgBanner;
 
+    private Button btnShop;
     private RecyclerView mRecyclerView, cRecyclerView;
     private PopularAdapter mAdapter;
-    private CategoryAdapter cAdapter;
 
     private DatabaseReference mDatabaseRef;
     private List<Popular> mPopulars;
-    private List<Category> cCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +57,21 @@ public class ShopActivity extends AppCompatActivity {
         for (int slide:sliders){
             bannerFliper(slide);
         }
-        showCategories();
+
         showPopularProducts();
+
+        btnShop = findViewById(R.id.btnMoveShoping);
+
+        btnShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShopActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
     public void bannerFliper(int image){
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(image);
@@ -72,32 +98,6 @@ public class ShopActivity extends AppCompatActivity {
                 }
                 mAdapter = new PopularAdapter(ShopActivity.this, mPopulars);
                 mRecyclerView.setAdapter(mAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ShopActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-    public void showCategories(){
-        cRecyclerView = findViewById(R.id.category_view);
-        cRecyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        cRecyclerView.setLayoutManager(mLayoutManager);
-
-        cCategory = new ArrayList<>();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Category");
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                    Category category = postSnapshot.getValue(Category.class);
-                    cCategory.add(category);
-                }
-                cAdapter = new CategoryAdapter(ShopActivity.this, cCategory);
-                cRecyclerView.setAdapter(cAdapter);
             }
 
             @Override
