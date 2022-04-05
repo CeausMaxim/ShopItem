@@ -117,6 +117,8 @@ public class CartActivity extends AppCompatActivity implements IDProductLoadList
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerProducts.setLayoutManager(gridLayoutManager);
         recyclerProducts.addItemDecoration(new SpaceItemDecoration());
+
+        btnCart.setOnClickListener(v -> startActivity(new Intent(this, CartDetailActivity.class)));
     }
 
     @Override

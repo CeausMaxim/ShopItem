@@ -17,4 +17,5 @@
     <string name="btn_register">Register</string>
     <string name="popular_products">Popular Products</string>
     <string name="browse_category">Browser Category</string>
+    <string name="_1">1</string>
 </resources>
